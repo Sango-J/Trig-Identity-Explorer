@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useFormState } from 'react-dom';
+import React, { useState, useEffect, useActionState } from 'react';
 import { BookOpen, SigmaSquare } from 'lucide-react';
 import { handleVerifyIdentity, FormState } from '@/app/actions';
 import { Button } from '@/components/ui/button';
@@ -21,7 +20,7 @@ const initialState: FormState = {
 };
 
 export function TrigExplorer() {
-  const [formState, formAction] = useFormState(handleVerifyIdentity, initialState);
+  const [formState, formAction] = useActionState(handleVerifyIdentity, initialState);
   const [identityInput, setIdentityInput] = useState('');
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { toast } = useToast();
