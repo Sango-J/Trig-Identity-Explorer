@@ -15,6 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 import { SubmitButton } from '@/components/submit-button';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from './ui/scroll-area';
+import { Skeleton } from './ui/skeleton';
 
 const initialState: FormState = {
   message: '',
@@ -25,6 +26,11 @@ export function TrigExplorer() {
   const [identityInput, setIdentityInput] = useState('');
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { toast } = useToast();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (formState?.error) {
@@ -43,20 +49,39 @@ export function TrigExplorer() {
           <SigmaSquare className="h-8 w-8 text-primary" />
           <h1 className="font-headline text-xl font-bold">Explorador de Identidades Trigonométricas</h1>
         </div>
-        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-          <SheetTrigger asChild>
-            <Button variant="outline">
-              <BookOpen className="mr-0 h-4 w-4 md:mr-2" />
-              <span className="hidden md:inline">Referencia</span>
-            </Button>
-          </SheetTrigger>
-          <TrigReferenceSheet />
-        </Sheet>
+        {isClient ? (
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline">
+                <BookOpen className="mr-0 h-4 w-4 md:mr-2" />
+                <span className="hidden md:inline">Referencia</span>
+              </Button>
+            </SheetTrigger>
+            <TrigReferenceSheet />
+          </Sheet>
+        ) : (
+          <Button variant="outline" disabled>
+            <BookOpen className="mr-0 h-4 w-4 md:mr-2" />
+            <span className="hidden md:inline">Referencia</span>
+          </Button>
+        )}
       </header>
       <div className="grid flex-1 overflow-hidden md:grid-cols-[320px_1fr]">
         <aside className="hidden border-r md:block">
           <ScrollArea className="h-full">
-            <ExampleSidebar onSelectIdentity={setIdentityInput} />
+            {isClient ? (
+              <ExampleSidebar onSelectIdentity={setIdentityInput} />
+            ) : (
+              <div className="p-4">
+                <h2 className="mb-4 text-lg font-semibold tracking-tight">Ejemplos de Identidades</h2>
+                <div className="space-y-2">
+                  <Skeleton className="h-8 w-full" />
+                  <Skeleton className="h-8 w-full" />
+                  <Skeleton className="h-8 w-full" />
+                  <Skeleton className="h-8 w-full" />
+                </div>
+              </div>
+            )}
           </ScrollArea>
         </aside>
         <main className="flex flex-col overflow-hidden">
