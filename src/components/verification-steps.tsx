@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { VerifyTrigIdentityOutput } from '@/ai/flows/verify-trig-identity-flow';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
