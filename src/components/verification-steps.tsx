@@ -23,9 +23,9 @@ export function VerificationSteps({ result }: VerificationStepsProps) {
               className={result.isTrue ? `bg-green-500 hover:bg-green-500/90 text-primary-foreground` : ''}
             >
               {result.isTrue ? (
-                <CheckCircle2 className="mr-2 h-4 w-4" />
+                <CheckCircle2 className="me-2 h-4 w-4" />
               ) : (
-                <XCircle className="mr-2 h-4 w-4" />
+                <XCircle className="me-2 h-4 w-4" />
               )}
               {result.isTrue ? 'La Identidad es Verdadera' : 'La Identidad es Falsa'}
             </Badge>

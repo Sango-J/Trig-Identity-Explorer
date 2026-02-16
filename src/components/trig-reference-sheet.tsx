@@ -1,3 +1,5 @@
+'use client';
+
 import {
   SheetContent,
   SheetHeader,
@@ -13,6 +15,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { ScrollArea } from './ui/scroll-area';
+import { useDirection } from './direction-provider';
 
 const referenceData = [
   { func: 'Seno', abbr: 'sen(θ)', relation: 'opuesto / hipotenusa' },
@@ -24,8 +27,9 @@ const referenceData = [
 ];
 
 export function TrigReferenceSheet() {
+  const { direction } = useDirection();
   return (
-    <SheetContent className="w-full max-w-full p-0 sm:max-w-lg">
+    <SheetContent side={direction === 'rtl' ? 'left' : 'right'} className="w-full max-w-full p-0 sm:max-w-lg">
       <SheetHeader className="p-6">
         <SheetTitle>Referencia de Funciones Trigonométricas</SheetTitle>
         <SheetDescription>

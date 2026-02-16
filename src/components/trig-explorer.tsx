@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useActionState } from 'react';
-import { BookOpen, SigmaSquare } from 'lucide-react';
+import { BookOpen, SigmaSquare, AlignLeft, AlignRight } from 'lucide-react';
 import { handleVerifyIdentity, FormState } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -16,6 +16,7 @@ import { SubmitButton } from '@/components/submit-button';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from './ui/scroll-area';
 import { Skeleton } from './ui/skeleton';
+import { useDirection } from './direction-provider';
 
 const initialState: FormState = {
   message: '',
@@ -27,6 +28,7 @@ export function TrigExplorer() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { toast } = useToast();
   const [isClient, setIsClient] = useState(false);
+  const { direction, toggleDirection } = useDirection();
 
   useEffect(() => {
     setIsClient(true);
@@ -49,25 +51,30 @@ export function TrigExplorer() {
           <SigmaSquare className="h-8 w-8 text-primary" />
           <h1 className="font-headline text-xl font-bold">Explorador de Identidades Trigonométricas</h1>
         </div>
-        {isClient ? (
-          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline">
-                <BookOpen className="mr-0 h-4 w-4 md:mr-2" />
-                <span className="hidden md:inline">Referencia</span>
-              </Button>
-            </SheetTrigger>
-            <TrigReferenceSheet />
-          </Sheet>
-        ) : (
-          <Button variant="outline" disabled>
-            <BookOpen className="mr-0 h-4 w-4 md:mr-2" />
-            <span className="hidden md:inline">Referencia</span>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={toggleDirection} aria-label="Cambiar dirección del texto">
+            {direction === 'ltr' ? <AlignRight className="h-4 w-4" /> : <AlignLeft className="h-4 w-4" />}
           </Button>
-        )}
+          {isClient ? (
+            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline">
+                  <BookOpen className="mr-0 h-4 w-4 md:me-2" />
+                  <span className="hidden md:inline">Referencia</span>
+                </Button>
+              </SheetTrigger>
+              <TrigReferenceSheet />
+            </Sheet>
+          ) : (
+            <Button variant="outline" disabled>
+              <BookOpen className="mr-0 h-4 w-4 md:me-2" />
+              <span className="hidden md:inline">Referencia</span>
+            </Button>
+          )}
+        </div>
       </header>
-      <div className="grid flex-1 overflow-hidden md:grid-cols-[320px_1fr]">
-        <aside className="hidden border-r md:block">
+      <div className="flex flex-1 flex-row overflow-hidden">
+        <aside className="hidden w-[320px] shrink-0 border-r rtl:border-l rtl:border-r-0 md:block">
           <ScrollArea className="h-full">
             {isClient ? (
               <ExampleSidebar onSelectIdentity={setIdentityInput} />
@@ -84,7 +91,7 @@ export function TrigExplorer() {
             )}
           </ScrollArea>
         </aside>
-        <main className="flex flex-col overflow-hidden">
+        <main className="flex flex-1 flex-col overflow-hidden">
           <div className="flex-shrink-0 border-b p-4 md:p-6">
             <form action={formAction} className="space-y-4">
               <Label htmlFor="identity-input">Ingresa una identidad trigonométrica para verificar</Label>
