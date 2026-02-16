@@ -1,10 +1,15 @@
 'use server';
 
-import { verifyTrigIdentity, VerifyTrigIdentityOutput } from '@/ai/flows/verify-trig-identity-flow';
+import {
+  verifyTrigIdentity,
+  VerifyTrigIdentityOutput,
+  VerificationStrategy,
+} from '@/ai/flows/verify-trig-identity-flow';
 import { z } from 'zod';
 
 const inputSchema = z.object({
   identity: z.string().min(3, 'La identidad debe tener al menos 3 caracteres.'),
+  strategy: z.enum(['simplify-left', 'simplify-right', 'sides']),
 });
 
 export type FormState = {
@@ -20,18 +25,24 @@ export async function handleVerifyIdentity(
 ): Promise<FormState> {
   const validatedFields = inputSchema.safeParse({
     identity: formData.get('identity'),
+    strategy: formData.get('strategy'),
   });
 
   if (!validatedFields.success) {
+    const fieldErrors = validatedFields.error.flatten().fieldErrors;
+    const message = fieldErrors.identity?.[0] || fieldErrors.strategy?.[0] || 'Entrada inválida.';
     return {
-      message: validatedFields.error.flatten().fieldErrors.identity?.[0] || 'Entrada inválida.',
+      message: message,
       error: true,
       timestamp: Date.now(),
     };
   }
 
   try {
-    const result = await verifyTrigIdentity({ identity: validatedFields.data.identity });
+    const result = await verifyTrigIdentity({
+      identity: validatedFields.data.identity,
+      strategy: validatedFields.data.strategy as VerificationStrategy,
+    });
     return {
       message: 'Verificación completa.',
       data: result,

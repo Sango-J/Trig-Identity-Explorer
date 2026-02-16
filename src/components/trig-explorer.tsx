@@ -17,6 +17,7 @@ import { Label } from '@/components/ui/label';
 import { ScrollArea } from './ui/scroll-area';
 import { Skeleton } from './ui/skeleton';
 import { useDirection } from './direction-provider';
+import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 const initialState: FormState = {
   message: '',
@@ -94,16 +95,37 @@ export function TrigExplorer() {
         <main className="flex flex-1 flex-col overflow-hidden">
           <div className="flex-shrink-0 border-b p-4 md:p-6">
             <form action={formAction} className="space-y-4">
-              <Label htmlFor="identity-input">Ingresa una identidad trigonométrica para verificar</Label>
-              <Textarea
-                id="identity-input"
-                name="identity"
-                value={identityInput}
-                onChange={(e) => setIdentityInput(e.target.value)}
-                placeholder="ej., tan(x) * cos(x) = sin(x)"
-                className="min-h-[80px] text-lg"
-                required
-              />
+              <div>
+                <Label htmlFor="identity-input">Ingresa una identidad trigonométrica para verificar</Label>
+                <Textarea
+                  id="identity-input"
+                  name="identity"
+                  value={identityInput}
+                  onChange={(e) => setIdentityInput(e.target.value)}
+                  placeholder="ej., tan(x) * cos(x) = sin(x)"
+                  className="mt-2 min-h-[80px] text-lg"
+                  required
+                />
+              </div>
+
+              <div>
+                <Label className="mb-2 block">Estrategia de Verificación</Label>
+                <RadioGroup name="strategy" defaultValue="simplify-left" className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="simplify-left" id="s-left" />
+                    <Label htmlFor="s-left">Simplificar Izquierda</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="simplify-right" id="s-right" />
+                    <Label htmlFor="s-right">Simplificar Derecha</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="sides" id="s-sides" />
+                    <Label htmlFor="s-sides">Usar Catetos/Hipotenusa</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
               <SubmitButton />
             </form>
           </div>
