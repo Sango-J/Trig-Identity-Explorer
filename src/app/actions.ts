@@ -4,7 +4,7 @@ import { verifyTrigIdentity, VerifyTrigIdentityOutput } from '@/ai/flows/verify-
 import { z } from 'zod';
 
 const inputSchema = z.object({
-  identity: z.string().min(3, 'Identity must be at least 3 characters long.'),
+  identity: z.string().min(3, 'La identidad debe tener al menos 3 caracteres.'),
 });
 
 export type FormState = {
@@ -24,7 +24,7 @@ export async function handleVerifyIdentity(
 
   if (!validatedFields.success) {
     return {
-      message: validatedFields.error.flatten().fieldErrors.identity?.[0] || 'Invalid input.',
+      message: validatedFields.error.flatten().fieldErrors.identity?.[0] || 'Entrada inválida.',
       error: true,
       timestamp: Date.now(),
     };
@@ -33,7 +33,7 @@ export async function handleVerifyIdentity(
   try {
     const result = await verifyTrigIdentity({ identity: validatedFields.data.identity });
     return {
-      message: 'Verification complete.',
+      message: 'Verificación completa.',
       data: result,
       error: false,
       timestamp: Date.now(),
@@ -41,7 +41,7 @@ export async function handleVerifyIdentity(
   } catch (e) {
     console.error(e);
     return {
-      message: 'An AI error occurred during verification. Please check your input or try again later.',
+      message: 'Ocurrió un error de IA durante la verificación. Por favor, revisa tu entrada o inténtalo de nuevo más tarde.',
       error: true,
       timestamp: Date.now(),
     };

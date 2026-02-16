@@ -11,12 +11,12 @@ export function SubmitButton() {
       {pending ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Verifying...
+          Verificando...
         </>
       ) : (
         <>
           <Sparkles className="mr-2 h-4 w-4" />
-          Verify with AI
+          Verificar con IA
         </>
       )}
     </Button>

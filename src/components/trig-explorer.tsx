@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, useActionState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useActionState } from 'react';
 import { BookOpen, SigmaSquare } from 'lucide-react';
 import { handleVerifyIdentity, FormState } from '@/app/actions';
 import { Button } from '@/components/ui/button';
@@ -40,13 +41,13 @@ export function TrigExplorer() {
       <header className="flex flex-shrink-0 items-center justify-between border-b px-4 py-2 md:px-6">
         <div className="flex items-center gap-2">
           <SigmaSquare className="h-8 w-8 text-primary" />
-          <h1 className="font-headline text-xl font-bold">Trig Identity Explorer</h1>
+          <h1 className="font-headline text-xl font-bold">Explorador de Identidades Trigonométricas</h1>
         </div>
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
             <Button variant="outline">
               <BookOpen className="mr-0 h-4 w-4 md:mr-2" />
-              <span className="hidden md:inline">Reference</span>
+              <span className="hidden md:inline">Referencia</span>
             </Button>
           </SheetTrigger>
           <TrigReferenceSheet />
@@ -61,13 +62,13 @@ export function TrigExplorer() {
         <main className="flex flex-col overflow-hidden">
           <div className="flex-shrink-0 border-b p-4 md:p-6">
             <form action={formAction} className="space-y-4">
-              <Label htmlFor="identity-input">Enter a trigonometric identity to verify</Label>
+              <Label htmlFor="identity-input">Ingresa una identidad trigonométrica para verificar</Label>
               <Textarea
                 id="identity-input"
                 name="identity"
                 value={identityInput}
                 onChange={(e) => setIdentityInput(e.target.value)}
-                placeholder="e.g., tan(x) * cos(x) = sin(x)"
+                placeholder="ej., tan(x) * cos(x) = sin(x)"
                 className="min-h-[80px] text-lg"
                 required
               />

@@ -14,7 +14,7 @@ interface ExampleSidebarProps {
   onSelectIdentity: (identity: string) => void;
 }
 
-const categories: IdentityCategory[] = ['Pythagorean', 'Sum & Difference', 'Double Angle', 'Half Angle'];
+const categories: IdentityCategory[] = ['Pitagóricas', 'Suma y Diferencia', 'Ángulo Doble', 'Ángulo Mitad'];
 
 export function ExampleSidebar({ onSelectIdentity }: ExampleSidebarProps) {
   const identitiesByCategory = categories.map(category => ({
@@ -24,8 +24,8 @@ export function ExampleSidebar({ onSelectIdentity }: ExampleSidebarProps) {
 
   return (
     <div className="p-4">
-      <h2 className="mb-4 text-lg font-semibold tracking-tight">Example Identities</h2>
-      <Accordion type="multiple" defaultValue={['Pythagorean']} className="w-full">
+      <h2 className="mb-4 text-lg font-semibold tracking-tight">Ejemplos de Identidades</h2>
+      <Accordion type="multiple" defaultValue={['Pitagóricas']} className="w-full">
         {identitiesByCategory.map(({ category, identities }) => (
           <AccordionItem value={category} key={category}>
             <AccordionTrigger>{category}</AccordionTrigger>

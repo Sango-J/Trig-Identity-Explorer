@@ -15,21 +15,21 @@ import {
 import { ScrollArea } from './ui/scroll-area';
 
 const referenceData = [
-  { func: 'Sine', abbr: 'sin(θ)', relation: 'opposite / hypotenuse' },
-  { func: 'Cosine', abbr: 'cos(θ)', relation: 'adjacent / hypotenuse' },
-  { func: 'Tangent', abbr: 'tan(θ)', relation: 'sin(θ) / cos(θ)' },
-  { func: 'Cosecant', abbr: 'csc(θ)', relation: '1 / sin(θ)' },
-  { func: 'Secant', abbr: 'sec(θ)', relation: '1 / cos(θ)' },
-  { func: 'Cotangent', abbr: 'cot(θ)', relation: '1 / tan(θ)' },
+  { func: 'Seno', abbr: 'sen(θ)', relation: 'opuesto / hipotenusa' },
+  { func: 'Coseno', abbr: 'cos(θ)', relation: 'adyacente / hipotenusa' },
+  { func: 'Tangente', abbr: 'tan(θ)', relation: 'sen(θ) / cos(θ)' },
+  { func: 'Cosecante', abbr: 'csc(θ)', relation: '1 / sen(θ)' },
+  { func: 'Secante', abbr: 'sec(θ)', relation: '1 / cos(θ)' },
+  { func: 'Cotangente', abbr: 'cot(θ)', relation: '1 / tan(θ)' },
 ];
 
 export function TrigReferenceSheet() {
   return (
     <SheetContent className="w-full max-w-full p-0 sm:max-w-lg">
       <SheetHeader className="p-6">
-        <SheetTitle>Trigonometric Functions Reference</SheetTitle>
+        <SheetTitle>Referencia de Funciones Trigonométricas</SheetTitle>
         <SheetDescription>
-          A quick reference for common trigonometric functions and their properties.
+          Una referencia rápida de las funciones trigonométricas comunes y sus propiedades.
         </SheetDescription>
       </SheetHeader>
       <ScrollArea className="h-[calc(100vh-8rem)]">
@@ -37,9 +37,9 @@ export function TrigReferenceSheet() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Function</TableHead>
-                <TableHead>Abbreviation</TableHead>
-                <TableHead>Relation</TableHead>
+                <TableHead>Función</TableHead>
+                <TableHead>Abreviatura</TableHead>
+                <TableHead>Relación</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

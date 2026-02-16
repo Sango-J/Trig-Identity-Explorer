@@ -17,7 +17,7 @@ export function VerificationSteps({ result }: VerificationStepsProps) {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-4">
-            <span>Verification Result</span>
+            <span>Resultado de la Verificación</span>
             <Badge
               variant={result.isTrue ? 'default' : 'destructive'}
               className={result.isTrue ? `bg-green-500 hover:bg-green-500/90 text-primary-foreground` : ''}
@@ -27,7 +27,7 @@ export function VerificationSteps({ result }: VerificationStepsProps) {
               ) : (
                 <XCircle className="mr-2 h-4 w-4" />
               )}
-              {result.isTrue ? 'Identity is True' : 'Identity is False'}
+              {result.isTrue ? 'La Identidad es Verdadera' : 'La Identidad es Falsa'}
             </Badge>
           </CardTitle>
           <CardDescription>{result.finalVerification}</CardDescription>
@@ -35,24 +35,24 @@ export function VerificationSteps({ result }: VerificationStepsProps) {
       </Card>
 
       <div className="space-y-4">
-        <h3 className="font-headline text-xl font-semibold">Step-by-Step Process</h3>
+        <h3 className="font-headline text-xl font-semibold">Proceso Paso a Paso</h3>
         {result.steps.map((step, index) => (
           <React.Fragment key={index}>
             <Card className="transition-all hover:shadow-md">
               <CardHeader>
-                <CardTitle className="text-lg">Step {index + 1}</CardTitle>
+                <CardTitle className="text-lg">Paso {index + 1}</CardTitle>
                 <CardDescription>
-                  <span className="font-semibold text-accent">Rule Applied: </span>
+                  <span className="font-semibold text-accent">Regla Aplicada: </span>
                   {step.ruleApplied}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="mb-2 text-sm font-semibold text-muted-foreground">Expression</h4>
+                  <h4 className="mb-2 text-sm font-semibold text-muted-foreground">Expresión</h4>
                   <p className="font-mono rounded-md bg-muted p-3 text-sm text-muted-foreground">{step.expression}</p>
                 </div>
                 <div>
-                  <h4 className="mb-2 text-sm font-semibold text-muted-foreground">Explanation</h4>
+                  <h4 className="mb-2 text-sm font-semibold text-muted-foreground">Explicación</h4>
                   <p className="text-sm">{step.explanation}</p>
                 </div>
               </CardContent>
@@ -65,7 +65,7 @@ export function VerificationSteps({ result }: VerificationStepsProps) {
           </React.Fragment>
         ))}
         <Separator />
-        <p className="text-center text-sm font-semibold text-muted-foreground">End of verification.</p>
+        <p className="text-center text-sm font-semibold text-muted-foreground">Fin de la verificación.</p>
       </div>
     </div>
   );
