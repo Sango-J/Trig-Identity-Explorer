@@ -1,4 +1,4 @@
-steps:
+steps:jobs 
 - id: 'auth'
   uses: 'google-github-actions/auth@v2'
   with:
